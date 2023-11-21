@@ -39,8 +39,8 @@ function conversionSetter(state, action)
 const initialInput = 
 {
   inputValue: 0,
-  inputType: currencyTypes.Dollar.code,
-  conversionType: currencyTypes.Dollar.code,
+  inputType: currencyTypes.Dollar,
+  conversionType: currencyTypes.Dollar,
   // outputValue: 0 
 }
 

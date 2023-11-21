@@ -14,7 +14,7 @@ function CurrencyType(props) {
           return (
             <option 
               key={currencyTypes[key].code} 
-              value={currencyTypes[key].code}
+              value={currencyTypes[key]}
             >
               {currencyTypes[key].code} {currencyTypes[key].symbol}
             </option>
