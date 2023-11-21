@@ -56,7 +56,7 @@ function CalculateAPI( props )
       </div>
       <div>
         <h2>Value: </h2>
-        <span>{getSymbol(props.convertTo)}{Number(props.inputValue*conversionRate).toFixed(2)}</span>
+        <span>{getSymbol(props.convertTo)} {Number(props.inputValue*conversionRate).toFixed(2)}</span>
         </div>
     </div>
   )
