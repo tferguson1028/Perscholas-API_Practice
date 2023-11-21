@@ -5,8 +5,8 @@ function CurrencyInput(props) {
   console.log(props);
 
   return (
-    <>
-      <span>Currency</span>
+    <div className="Input">
+      <div>Currency</div>
       <input onChange={(e) => 
         props.setFunc(
         { 
@@ -14,8 +14,7 @@ function CurrencyInput(props) {
           payload: { value: e.target.value }
         })
       } type="number" name="moneyVal" />
-      <CurrencyType />
-    </>
+    </div>
   )
 }
 

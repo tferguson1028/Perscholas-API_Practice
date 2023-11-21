@@ -3,16 +3,15 @@ import currencyTypes from '../models/Currencies';
 
 function CurrencyType() {
   return (
-    <>
-      {/* <label htmlFor="currency">Currency Type</label> */}
+    <span className="TypeInput">
       <select name="currency">
       {
-        Object.keys(currencyTypes).map((key) =>
-          {return <option value={currencyTypes[key].code}>{currencyTypes[key].code} {currencyTypes[key].symbol}</option>
+        Object.keys(currencyTypes).map((key, index) =>
+          {return <option key={currencyTypes[key].code} value={currencyTypes[key].code}>{currencyTypes[key].code} {currencyTypes[key].symbol}</option>
         })
       }
       </select>
-    </>
+    </span>
   )
 }
 

@@ -9,7 +9,7 @@ const CURRENCY_ACTIONS =
   SET_INPUT: 0,
   SET_SYMBOL: 1,
   SET_CONVERSION: 2,
-  CALCULATE: -1
+  // CALCULATE: -1
 }
 
 function conversionSetter(state, action)
@@ -32,9 +32,8 @@ function conversionSetter(state, action)
       retState.conversionType = String(action.payload.value);
       break;
       
-    case CURRENCY_ACTIONS.CALCULATE:
-      
-      break;
+    // case CURRENCY_ACTIONS.CALCULATE:
+    //   break;
   }
   
   return retState;
@@ -55,22 +54,19 @@ function App() {
     dispatch({ type: CURRENCY_ACTIONS.CALCULATE });
   }, [values]);
   
-  function calculateOutput(input, inputType, conversion)
-  {
-    
-    return null;
-  }
-  
   return (
     <div className="App">
-      <div className='input'>
-        <span><CurrencyInput actions={CURRENCY_ACTIONS} setFunc={dispatch}/></span>
-        <span> => </span>
-        <span><CurrencyType /></span>
+      <CurrencyInput actions={CURRENCY_ACTIONS} setFunc={dispatch}/>
+      <div className="Conversion">  
+        <CurrencyType />
+        <span> {"=>"} </span>
+        <CurrencyType />
       </div>
-      <div className='output'>
-        <CalculateAPI />
-      </div>
+      <CalculateAPI 
+        inputValue={values.inputValue}
+        inputType={values.inputType}
+        convertTo={values.conversionType}
+      />
     </div>
   );
 }

@@ -14,10 +14,10 @@ function CalculateAPI(props)
   }
   
   return (
-    <>
-      <div>Currency</div>
+    <div className="Output">
+      <div>Conversion</div>
       
-    </>
+    </div>
   )
 }
 
