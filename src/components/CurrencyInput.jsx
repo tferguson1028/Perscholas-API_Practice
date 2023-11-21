@@ -3,7 +3,7 @@ import React from 'react'
 function CurrencyInput(props) {
   return (
     <div className="Input">
-      <div>Currency</div>
+      <h2>Currency</h2>
       <input 
         onChange={(e) => 
         { 

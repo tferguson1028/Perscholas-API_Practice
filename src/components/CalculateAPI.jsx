@@ -49,13 +49,13 @@ function CalculateAPI( props )
   
   return (
     <div className="Output">
-      <button onClick={updateOutput}>Calculate</button>
+      {/* <button onClick={updateOutput}>Calculate</button> */}
       <div>
-        <span>Conversion Rate: </span>
+        <h2>Conversion Rate</h2>
         <span>{Number(conversionRate).toFixed(2)}</span>
       </div>
       <div>
-        <span>Value: </span>
+        <h2>Value: </h2>
         <span>{getSymbol(props.convertTo)}{Number(props.inputValue*conversionRate).toFixed(2)}</span>
         </div>
     </div>

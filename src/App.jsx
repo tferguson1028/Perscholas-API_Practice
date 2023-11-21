@@ -1,8 +1,10 @@
-import {useEffect, useReducer, useState} from 'react';
+import {useReducer} from 'react';
 import CurrencyInput from './components/CurrencyInput';
 import CurrencyType from './components/CurrencyType';
 import CalculateAPI from './components/CalculateAPI';
 import currencyTypes from './models/Currencies';
+
+import "./style.css"
 
 const CURRENCY_ACTIONS =
 {
@@ -44,11 +46,17 @@ function App() {
   
   return (
     <div className="App">
-      <CurrencyInput action={CURRENCY_ACTIONS.SET_INPUT} setFunc={setValues}/>
-      <div className="Conversion">  
-        <CurrencyType action={CURRENCY_ACTIONS.SET_SYMBOL} setFunc={setValues}/>
-        <span> {"=>"} </span>
-        <CurrencyType action={CURRENCY_ACTIONS.SET_CONVERSION} setFunc={setValues}/>
+      <header>
+        <h1>Currency Converter</h1>
+        <img src='./assets/conversionLogo.png'></img>
+      </header>
+      <div className='inputSection'>
+        <CurrencyInput action={CURRENCY_ACTIONS.SET_INPUT} setFunc={setValues}/>
+        <div className="Conversion">  
+          <CurrencyType action={CURRENCY_ACTIONS.SET_SYMBOL} setFunc={setValues}/>
+          <span> {"=>"} </span>
+          <CurrencyType action={CURRENCY_ACTIONS.SET_CONVERSION} setFunc={setValues}/>
+        </div>
       </div>
       <CalculateAPI 
         inputValue={values.inputValue}
