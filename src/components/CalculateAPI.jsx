@@ -1,28 +1,54 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 
 function CalculateAPI({ inputValue, inputType, convertTo }) 
 {
+  const [conversionRate, setConversionRate] = useState(1);
+  const [output, setOutput] = useState(0);
   
-
-  const apiVersion = "latest";
-  const date = "latest";
-  const endpoint = "";
-  const apiURL = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@{${apiVersion}}/{${date}}/{${endpoint}}`;
+  // updateApiURL(inputType, convertTo);  
+  // useEffect(() => 
+  // { 
+  //   console.log("P"); 
+  //   updateApiURL(inputType, convertTo);
+  //   updateConversionRate();
+  //   setOutput(inputValue*conversion);
+  // }, []);
   
-  useEffect(() => { console.log("P"); }, [inputValue])
-  
-  function convert(input, type, convert)
+  function getApiURL(type, convert)
   {
-    console.log("p"); 
-    return null;
+    let apiVersion = "latest";
+    let date = "latest";
+    let endpoint = `currencies/${type.toLowerCase()}/${convert.toLowerCase()}`;
+    return `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@${apiVersion}/${date}/${endpoint}.json`;
+  }
+  
+  async function updateConversionRate()
+  {
+    try{
+      const response = await fetch(getApiURL(inputType, convertTo));
+      const data = await response.json();
+      setConversionRate(data[convertTo.toLowerCase()]);
+    } catch(e){
+      console.error(e);
+    }
+  }
+  
+  function updateOutput()
+  {
+    updateConversionRate();
+    setOutput(Number(inputValue)*Number(conversionRate));
   }
   
   return (
     <div className="Output">
-      <div>Conversion</div>
       <div>
-        {String(convert(inputValue, inputType, convertTo))}
+        <span>Conversion Rate:</span>
+        <span>{conversionRate}</span>
       </div>
+      <div>
+        <span>Value:</span>
+        <span>{output}</span>
+        </div>
     </div>
   )
 }

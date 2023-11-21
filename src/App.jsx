@@ -32,7 +32,7 @@ function conversionSetter(state, action)
     // case CURRENCY_ACTIONS.CALCULATE:
     //   break;
   }
-  console.log(retState);
+  // console.log(retState);
   return retState;
 }
 
@@ -47,9 +47,9 @@ const initialInput =
 function App() {
   const [values, setValue] = useReducer(conversionSetter, initialInput);
   
-  useEffect(() => {
-    setValue({ type: CURRENCY_ACTIONS.CALCULATE });
-  }, [values]);
+  useEffect((e) => {
+    console.log(values);
+  }, [...Object.values(values)]);
   
   return (
     <div className="App">
