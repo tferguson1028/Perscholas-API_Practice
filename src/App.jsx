@@ -42,8 +42,6 @@ const initialInput =
 function App() {
   const [values, setValues] = useReducer(conversionSetter, initialInput);
   
-  // useEffect(() => {console.log("AAAAAAAAAA")}, [values]);
-  
   return (
     <div className="App">
       <CurrencyInput action={CURRENCY_ACTIONS.SET_INPUT} setFunc={setValues}/>
