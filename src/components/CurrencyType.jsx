@@ -3,8 +3,8 @@ import currencyTypes from '../models/Currencies';
 
 function CurrencyType() {
   return (
-    <div>
-      <label for="currency">Currency Type</label>
+    <>
+      {/* <label htmlFor="currency">Currency Type</label> */}
       <select name="currency">
       {
         Object.keys(currencyTypes).map((key) =>
@@ -12,7 +12,7 @@ function CurrencyType() {
         })
       }
       </select>
-    </div>
+    </>
   )
 }
 

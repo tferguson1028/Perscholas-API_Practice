@@ -1,8 +1,10 @@
 import React from 'react'
 
-function Currency() 
+function CalculateAPI(props) 
 {
-  
+  const apiVersion = "latest";
+  const date = "";
+  const endpoint = "";
   const apiURL = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@{${apiVersion}}/{${date}}/{${endpoint}}`;
   
   function getCurrency()
@@ -19,4 +21,4 @@ function Currency()
   )
 }
 
-export default Currency
+export default CalculateAPI
