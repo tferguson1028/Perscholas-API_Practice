@@ -5,16 +5,17 @@ function CurrencyType(props) {
   return (
     <span className="TypeInput">
       <select 
-        onChange={(e) => props.setFunc({ type: props.action, payload: { value: e.target.value } })}
+        onChange={(e) => {props.setFunc({ type: props.action, payload: { value: e.target.value } })}}
         name="currency"
       >
       {
         Object.keys(currencyTypes).map((key, index) =>
         { 
+          // console.log(currencyTypes[key]);
           return (
             <option 
               key={currencyTypes[key].code} 
-              value={currencyTypes[key]}
+              value={currencyTypes[key].code}
             >
               {currencyTypes[key].code} {currencyTypes[key].symbol}
             </option>

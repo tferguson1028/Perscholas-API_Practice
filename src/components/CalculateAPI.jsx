@@ -1,18 +1,10 @@
 import React, {useEffect, useState} from 'react'
+import currencyTypes from '../models/Currencies';
 
-function CalculateAPI({ inputValue, inputType, convertTo }) 
+function CalculateAPI( props ) 
 {
   const [conversionRate, setConversionRate] = useState(1);
   const [output, setOutput] = useState(0);
-  
-  // updateApiURL(inputType, convertTo);  
-  useEffect(() => 
-  { 
-    console.log("P"); 
-    // updateApiURL(inputType, convertTo);
-    // updateConversionRate();
-    // setOutput(inputValue*conversion);
-  }, [output, conversionRate]);
   
   function getApiURL(type, convert)
   {
@@ -25,12 +17,12 @@ function CalculateAPI({ inputValue, inputType, convertTo })
   async function updateConversionRate()
   {
     try{
-      let apiURL = getApiURL(inputType, convertTo);
+      let apiURL = getApiURL(props.inputType, props.convertTo);
       console.log(`fetching from ${apiURL}`);
       const response = await fetch(apiURL);
       const data = await response.json();
       console.log(`response: ${JSON.stringify(data)}`);
-      setConversionRate(data[convertTo.toLowerCase()]);
+      setConversionRate(data[props.convertTo.toLowerCase()]);
     } catch(e){
       console.error(e);
     }
@@ -39,7 +31,17 @@ function CalculateAPI({ inputValue, inputType, convertTo })
   function updateOutput()
   {
     updateConversionRate();
-    setOutput(Number(inputValue)*Number(conversionRate));
+    setOutput(Number(props.inputValue)*Number(conversionRate));
+    console.log(props.inputValue, conversionRate, output);
+  }
+  
+  function getSymbol(currencyCode)
+  {
+    for(let code in currencyTypes)
+    {
+      if(currencyCode === currencyTypes[code].code)
+        return currencyTypes[code].symbol;
+    }
   }
   
   return (
@@ -51,7 +53,7 @@ function CalculateAPI({ inputValue, inputType, convertTo })
       </div>
       <div>
         <span>Value: </span>
-        <span>{String(convertTo.symbol)}{output}</span>
+        <span>{getSymbol(props.convertTo)}{props.inputValue*conversionRate}</span>
         </div>
     </div>
   )

@@ -9,55 +9,44 @@ const CURRENCY_ACTIONS =
   SET_INPUT: 0,
   SET_SYMBOL: 1,
   SET_CONVERSION: 2,
-  // CALCULATE: -1
 }
 
 function conversionSetter(state, action)
 {
-  let retState = state;
   switch(action.type)
   {
     case CURRENCY_ACTIONS.SET_INPUT:
-      retState.inputValue = Number(action.payload.value);
+      state.inputValue = Number(action.payload.value);
       break;
       
     case CURRENCY_ACTIONS.SET_SYMBOL:
-      retState.inputType = String(action.payload.value);
+      state.inputType = String(action.payload.value);
       break;
       
     case CURRENCY_ACTIONS.SET_CONVERSION:
-      retState.conversionType = String(action.payload.value);
-      break;
-      
-    // case CURRENCY_ACTIONS.CALCULATE:
-    //   break;
+      state.conversionType = String(action.payload.value);
+      break;    
   }
-  // console.log(retState);
-  return retState;
+  return state;
 }
 
 const initialInput = 
 {
   inputValue: 0,
-  inputType: currencyTypes.Dollar,
-  conversionType: currencyTypes.Dollar,
-  // outputValue: 0 
+  inputType: currencyTypes.Dollar.code,
+  conversionType: currencyTypes.Dollar.code
 }
 
 function App() {
-  const [values, setValue] = useReducer(conversionSetter, initialInput);
-  
-  useEffect((e) => {
-    console.log(values);
-  }, [...Object.values(values)]);
+  const [values, setValues] = useReducer(conversionSetter, initialInput);
   
   return (
     <div className="App">
-      <CurrencyInput action={CURRENCY_ACTIONS.SET_INPUT} setFunc={setValue}/>
+      <CurrencyInput action={CURRENCY_ACTIONS.SET_INPUT} setFunc={setValues}/>
       <div className="Conversion">  
-        <CurrencyType action={CURRENCY_ACTIONS.SET_SYMBOL} setFunc={setValue}/>
+        <CurrencyType action={CURRENCY_ACTIONS.SET_SYMBOL} setFunc={setValues}/>
         <span> {"=>"} </span>
-        <CurrencyType action={CURRENCY_ACTIONS.SET_CONVERSION} setFunc={setValue}/>
+        <CurrencyType action={CURRENCY_ACTIONS.SET_CONVERSION} setFunc={setValues}/>
       </div>
       <CalculateAPI 
         inputValue={values.inputValue}
