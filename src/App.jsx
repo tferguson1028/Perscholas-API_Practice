@@ -14,10 +14,7 @@ const CURRENCY_ACTIONS =
 
 function conversionSetter(state, action)
 {
-  console.log(state);
-  console.log(action);
   let retState = state;
-  console.log(retState);
   switch(action.type)
   {
     case CURRENCY_ACTIONS.SET_INPUT:
@@ -35,32 +32,32 @@ function conversionSetter(state, action)
     // case CURRENCY_ACTIONS.CALCULATE:
     //   break;
   }
-  
+  console.log(retState);
   return retState;
 }
 
 const initialInput = 
 {
   inputValue: 0,
-  inputType: currencyTypes.Dollar,
-  conversionType: currencyTypes.Dollar,
-  outputValue: 0 
+  inputType: currencyTypes.Dollar.code,
+  conversionType: currencyTypes.Dollar.code,
+  // outputValue: 0 
 }
 
 function App() {
-  const [values, dispatch] = useReducer(conversionSetter, initialInput);
+  const [values, setValue] = useReducer(conversionSetter, initialInput);
   
   useEffect(() => {
-    dispatch({ type: CURRENCY_ACTIONS.CALCULATE });
+    setValue({ type: CURRENCY_ACTIONS.CALCULATE });
   }, [values]);
   
   return (
     <div className="App">
-      <CurrencyInput actions={CURRENCY_ACTIONS} setFunc={dispatch}/>
+      <CurrencyInput action={CURRENCY_ACTIONS.SET_INPUT} setFunc={setValue}/>
       <div className="Conversion">  
-        <CurrencyType />
+        <CurrencyType action={CURRENCY_ACTIONS.SET_SYMBOL} setFunc={setValue}/>
         <span> {"=>"} </span>
-        <CurrencyType />
+        <CurrencyType action={CURRENCY_ACTIONS.SET_CONVERSION} setFunc={setValue}/>
       </div>
       <CalculateAPI 
         inputValue={values.inputValue}
