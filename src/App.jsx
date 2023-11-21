@@ -13,21 +13,23 @@ const CURRENCY_ACTIONS =
 
 function conversionSetter(state, action)
 {
+  const newState = {...state};
   switch(action.type)
   {
     case CURRENCY_ACTIONS.SET_INPUT:
-      state.inputValue = Number(action.payload.value);
+      newState.inputValue = Number(action.payload.value);
       break;
       
     case CURRENCY_ACTIONS.SET_SYMBOL:
-      state.inputType = String(action.payload.value);
+      newState.inputType = String(action.payload.value);
       break;
       
     case CURRENCY_ACTIONS.SET_CONVERSION:
-      state.conversionType = String(action.payload.value);
-      break;    
+      newState.conversionType = String(action.payload.value);
+      break;
   }
-  return state;
+  
+  return newState;
 }
 
 const initialInput = 

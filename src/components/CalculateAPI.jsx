@@ -6,12 +6,13 @@ function CalculateAPI( props )
   const [conversionRate, setConversionRate] = useState(1);
   const [output, setOutput] = useState(0);
   
-  function getApiURL(type, convert)
+  useEffect(() => {updateOutput()}, [...Object.keys(props).values()]);
+  
+  function updateOutput()
   {
-    let apiVersion = "latest";
-    let date = "latest";
-    let endpoint = `currencies/${type.toLowerCase()}/${convert.toLowerCase()}`;
-    return `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@${apiVersion}/${date}/${endpoint}.json`;
+    updateConversionRate();
+    setOutput(Number(props.inputValue)*Number(conversionRate));
+    console.log(props.inputValue, conversionRate, output);
   }
   
   async function updateConversionRate()
@@ -28,11 +29,12 @@ function CalculateAPI( props )
     }
   }
   
-  function updateOutput()
+  function getApiURL(type, convert)
   {
-    updateConversionRate();
-    setOutput(Number(props.inputValue)*Number(conversionRate));
-    console.log(props.inputValue, conversionRate, output);
+    let apiVersion = "latest";
+    let date = "latest";
+    let endpoint = `currencies/${type.toLowerCase()}/${convert.toLowerCase()}`;
+    return `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@${apiVersion}/${date}/${endpoint}.json`;
   }
   
   function getSymbol(currencyCode)
@@ -49,11 +51,11 @@ function CalculateAPI( props )
       <button onClick={updateOutput}>Calculate</button>
       <div>
         <span>Conversion Rate: </span>
-        <span>{conversionRate}</span>
+        <span>{Number(conversionRate).toFixed(2)}</span>
       </div>
       <div>
         <span>Value: </span>
-        <span>{getSymbol(props.convertTo)}{props.inputValue*conversionRate}</span>
+        <span>{getSymbol(props.convertTo)}{Number(props.inputValue*conversionRate).toFixed(2)}</span>
         </div>
     </div>
   )
