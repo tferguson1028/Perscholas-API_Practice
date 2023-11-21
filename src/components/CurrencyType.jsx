@@ -11,7 +11,6 @@ function CurrencyType(props) {
       {
         Object.keys(currencyTypes).map((key, index) =>
         { 
-          // console.log(currencyTypes[key]);
           return (
             <option 
               key={currencyTypes[key].code} 

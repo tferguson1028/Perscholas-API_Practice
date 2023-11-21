@@ -34,13 +34,15 @@ function conversionSetter(state, action)
 
 const initialInput = 
 {
-  inputValue: 0,
+  inputValue: 1.00,
   inputType: currencyTypes.Dollar.code,
   conversionType: currencyTypes.Dollar.code
 }
 
 function App() {
   const [values, setValues] = useReducer(conversionSetter, initialInput);
+  
+  // useEffect(() => {console.log("AAAAAAAAAA")}, [values]);
   
   return (
     <div className="App">

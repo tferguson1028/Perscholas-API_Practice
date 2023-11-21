@@ -3,10 +3,19 @@ import currencyTypes from '../models/Currencies';
 
 function CalculateAPI( props ) 
 {
+  function getApiURL(type, convert)
+  {
+    let apiVersion = "latest";
+    let date = "latest";
+    let endpoint = `currencies/${type.toLowerCase()}/${convert.toLowerCase()}`;
+    return `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@${apiVersion}/${date}/${endpoint}.json`;
+  }
+  
+  const [apiURL, setApiURL] = useState(getApiURL(props.inputType, props.convertTo));
   const [conversionRate, setConversionRate] = useState(1);
   const [output, setOutput] = useState(0);
   
-  useEffect(() => {updateOutput()}, [...Object.keys(props).values()]);
+  useEffect(() => {updateOutput()}, [apiURL, props.inputType, props.convertTo]);
   
   function updateOutput()
   {
@@ -27,14 +36,6 @@ function CalculateAPI( props )
     } catch(e){
       console.error(e);
     }
-  }
-  
-  function getApiURL(type, convert)
-  {
-    let apiVersion = "latest";
-    let date = "latest";
-    let endpoint = `currencies/${type.toLowerCase()}/${convert.toLowerCase()}`;
-    return `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@${apiVersion}/${date}/${endpoint}.json`;
   }
   
   function getSymbol(currencyCode)
